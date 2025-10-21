@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaomoji</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo" data-zh="(◕‿◕✿) 颜文字收藏馆" data-en="(◕‿◕✿) Kaomoji Collection" data-ja="(◕‿◕✿) 顔文字コレクション">
+                (◕‿◕✿) 可爱颜文字收藏馆</h1>
+            <div class="language-switch">
+                <button class="lang-btn active" data-lang="zh">中文</button>
+                <button class="lang-btn" data-lang="en">English</button>
+                <button class="lang-btn" data-lang="ja">日本語</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="main">
+        <div class="container">
+            <!-- 介绍部分 -->
+            <section class="intro">
+                <h2 data-zh="关于颜文字" data-en="About Kaomoji" data-ja="顔文字について">关于颜文字</h2>
+                <div class="intro-content">
+                    <div class="intro-text">
+                        <p data-zh="颜文字（Kaomoji，顔文字）是一种流行的日本表情符号风格，由日语字符和语法标点组成，用于在短信和网络交流中表达情感。这个概念由日文字组合而成：kao（顔，意为脸）和moji（文字，意为字符）。"
+                            data-en="Kaomoji (顔文字) is a popular Japanese emoticon style made up of Japanese characters and grammar punctuation, used to express emotions in texting and online communication. The concept is formed by combining the Japanese words kao (顔 - face) and moji (文字 - character)."
+                            data-ja="顔文字（かおもじ）は、日本の文字や文法記号で作られた人気の絵文字スタイルで、メッセージやネット上のコミュニケーションにおいて感情を表現するために使用されます。この概念は、「かお」（顔 - 「顔」の意）と「もじ」（文字 - 「文字」の意）という二つの日本語を組み合わせて形成されています。">
+                            颜文字（Kaomoji，顔文字）是一种流行的日本表情符号风格，由日语字符和语法标点组成，用于在短信和网络交流中表达情感。这个概念由日文字组合而成："kao"（顔，意为"脸"）和"moji"（文字，意为"字符"）。
+                        </p>
+                        <p data-zh="日本人认为眼睛是心灵的镜子，因此与注重嘴部的西方表情符号不同，日本颜文字最核心的部分是眼睛。在互联网发展初期，缺乏面对面交流常导致误解，颜文字的兴起源于动漫爱好者希望更准确地传达情绪、避免尴尬。"
+                            data-en="Japanese people believe that the eyes are the mirror of the soul; therefore, unlike Western emoticons that focus on the mouth, the most crucial part of Japanese kaomoji is the eyes. In the early days of the internet, the lack of face-to-face communication often led to misunderstandings. The rise of kaomoji originated from anime and manga enthusiasts who wished to convey emotions more accurately and avoid awkwardness."
+                            data-ja="日本人は目が魂の鏡であると考えているため、口元を重視する西洋の絵文字とは異なり、日本の顔文字で最も重要な部分は目です。インターネットの発展初期には、対面コミュニケーションの不足が誤解を招くことが多く、顔文字の興隆は、感情をより正確に伝え、気まずさを避けたいというアニメ・マンガ愛好家に由来しています。">
+                            日本人认为眼睛是心灵的镜子，因此与注重嘴部的西方表情符号不同，日本颜文字最核心的部分是眼睛。在互联网发展初期，缺乏面对面交流常导致误解，颜文字的兴起源于动漫爱好者希望更准确地传达情绪、避免尴尬。
+                        </p>
+                        <p data-zh="日本颜文字极具多样性，数量远超10000种。这主要源于两个因素：首先，日语书写系统使用双字节字符集，可用字符范围远超单字节的拉丁或西里尔字母；其次，颜文字不仅能表达情绪，还能描绘复杂的动作、物体乃至完整场景。"
+                            data-en="Japanese kaomoji are extremely diverse, with their numbers far exceeding 10,000. This stems mainly from two factors: firstly, the Japanese writing system uses a double-byte character set, which offers a much wider range of available characters than the single-byte Latin or Cyrillic alphabets; secondly, kaomoji can not only express emotions but also depict complex actions, objects, and even complete scenes."
+                            data-ja="日本の顔文字は非常に多様で、その数は10,000種をはるかに超えます。これは主に二つの要因に由来します。第一に、日本語の書記システムがダブルバイト文字セットを使用しており、利用可能な文字の範囲がシングルバイトのラテン文字やキリル文字よりもはるかに広いこと。第二に、顔文字は感情を表現するだけでなく、複雑な動作、物体、さらには完全な情景までも描写できることです。">
+                            日本颜文字极具多样性，数量远超10000种。这主要源于两个因素：首先，日语书写系统使用双字节字符集，可用字符范围远超单字节的拉丁或西里尔字母；其次，颜文字不仅能表达情绪，还能描绘复杂的动作、物体乃至完整场景。
+                        </p>
+                        <p data-zh="本网站收集了来自日本网络资源的可爱（kawaii）颜文字合集，并欢迎您混合搭配不同元素，创造属于自己的创意表达！"
+                            data-en="This website collects a cute (kawaii) kaomoji compilation sourced from Japanese online resources. We welcome you to mix and match different elements to create your own creative expressions!"
+                            data-ja="このウェブサイトでは、日本のオンラインリソースから集められたかわいい（kawaii）顔文字のコレクションを紹介しています。さまざまな要素をミックスして、ご自身の創造的な表現を作り出すことを歓迎します！">
+                            本网站收集了来自日本网络资源的可爱（kawaii）颜文字合集，并欢迎您混合搭配不同元素，创造属于自己的创意表达！
+                        </p>
+                    </div>
+                    <div class="intro-image">
+                        <div class="cute-kaomoji">(◕ᴗ◕✿)</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 分类导航 -->
+            <section class="categories">
+                <h2 data-zh="颜文字分类" data-en="Kaomoji Categories" data-ja="顔文字のカテゴリ">颜文字分类</h2>
+                <div class="category-tabs">
+                    <button class="tab-btn active" data-category="positive" data-zh="积极情绪" data-en="Positive Emotions"
+                        data-ja="ポジティブな感情">积极情绪</button>
+                    <button class="tab-btn" data-category="negative" data-zh="消极情绪" data-en="Negative Emotions"
+                        data-ja="ネガティブな感情">消极情绪</button>
+                    <button class="tab-btn" data-category="neutral" data-zh="中性情绪" data-en="Neutral Emotions"
+                        data-ja="中立的な感情">中性情绪</button>
+                    <button class="tab-btn" data-category="actions" data-zh="各种动作" data-en="Actions"
+                        data-ja="さまざまなアクション">各种动作</button>
+                    <button class="tab-btn" data-category="animals" data-zh="动物" data-en="Animals"
+                        data-ja="動物">动物</button>
+                </div>
+            </section>
+
+            <!-- 颜文字展示区 -->
+            <section class="kaomoji-display">
+                <!--积极情绪-->
+                <div class="category-content active" id="positive">
+                    <!--喜悦-->
+                    <h3 data-zh="喜悦" data-en="Joy" data-ja="喜び">喜悦</h3>
+                    <div class="kaomoji-grid">
+                        <!-- <div class="kaomoji-item" data-kaomoji="(* ^ ω ^)" data-zh="开心" data-en="Joy" data-ja="嬉しい">(* ^ ω ^)</div> -->
+                        <!-- 目前每个二级分类下十个展示-->
+                        <div class="kaomoji-item" data-kaomoji="(*^ω^)">(*^ω^)</div>
+                        <div class="kaomoji-item" data-kaomoji="o(≧▽≦)o">o(≧▽≦)o</div>
+                        <div class="kaomoji-item" data-kaomoji="٩(◕‿◕)۶ノ～ ♡">٩(◕‿◕)۶ ♡</div>
+                        <div class="kaomoji-item" data-kaomoji="(((o(*°▽°*)o)))	">(((o(*°▽°*)o)))</div>
+                        <div class="kaomoji-item" data-kaomoji="(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧">(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧</div>
+                        <div class="kaomoji-item" data-kaomoji="☆*:.｡.o(≧▽≦)o.｡.:*☆">☆*:.｡.o(≧▽≦)o.｡.:*☆</div>
+                        <div class="kaomoji-item" data-kaomoji="(^人^)">(^人^)</div>
+                        <div class="kaomoji-item" data-kaomoji="∑d(°∀°d)">∑d(°∀°d)</div>
+                        <div class="kaomoji-item" data-kaomoji="（¬‿¬）	">（¬‿¬）</div>
+                        <div class="kaomoji-item" data-kaomoji="(•⩊•)">(•⩊•)</div>
+
+                    </div>
+
+                    <!--爱-->
+                    <h3 data-zh="爱" data-en="Love" data-ja="愛">爱</h3>
+                    <div class="kaomoji-grid">
+                        <div class="kaomoji-item" data-kaomoji="(ﾉ´ з `)ノ">(ﾉ´ з `)ノ</div>
+                        <div class="kaomoji-item" data-kaomoji="（ღ˘⌣˘ღ）">（ღ˘⌣˘ღ）</div>
+                        <div class="kaomoji-item" data-kaomoji="(´• ω •`) ♡">(´• ω •`) ♡</div>
+                        <div class="kaomoji-item" data-kaomoji="(・//ε//・)">(・//ε//・)</div>
+                        <div class="kaomoji-item" data-kaomoji="ヽ(♡‿♡)ノ">ヽ(♡‿♡)ノ</div>
+                        <div class="kaomoji-item" data-kaomoji="(❤⩊❤)[=_=](☆ε☆)">(❤⩊❤)[=_=](☆ε☆)</div>
+                        <div class="kaomoji-item" data-kaomoji="♡(>ᴗ•)">♡(>ᴗ•)</div>
+                        <div class="kaomoji-item" data-kaomoji="( ˘⌣˘)♡(˘⌣˘ )">( ˘⌣˘)♡(˘⌣˘ )</div>
+                        <div class="kaomoji-item" data-kaomoji="(˘∀˘)/(μ‿μ)❤">(˘∀˘)/(μ‿μ)❤</div>
+                        <div class="kaomoji-item" data-kaomoji="(⌒▽⌒)♡">(⌒▽⌒)♡</div>
+                    </div>
+
+                    <!--尴尬-->
+                    <h3 data-zh="害羞" data-en="Shy​" data-ja="恥ずかしい">害羞</h3>
+                    <div class="kaomoji-grid">
+                        <div class="kaomoji-item" data-kaomoji="（◡‿◡ *）">（◡‿◡ *）</div>
+                        <div class="kaomoji-item" data-kaomoji="（ᵔ.ᵔ）">（ᵔ.ᵔ）</div>
+                        <div class="kaomoji-item" data-kaomoji="(￣▽￣*)ゞ">(￣▽￣*)ゞ</div>
+                        <div class="kaomoji-item" data-kaomoji="（⁄ ⁄•⁄ω⁄•⁄ ⁄）">（⁄ ⁄•⁄ω⁄•⁄ ⁄）</div>
+                        <div class="kaomoji-item" data-kaomoji="（“ಡωಡ”）">（“ಡωಡ”）</div>
+                        <div class="kaomoji-item" data-kaomoji="(ง ื▿ ื)ว">(ง ื▿ ื)ว</div>
+                        <div class="kaomoji-item" data-kaomoji="（〃▽〃）">（〃▽〃）</div>
+                        <div class="kaomoji-item" data-kaomoji="（*μ_μ）">（*μ_μ）</div>
+                        <div class="kaomoji-item" data-kaomoji="（///￣ ￣///）">（///￣ ￣///）</div>
+                        <div class="kaomoji-item" data-kaomoji="(ง ื▿ ื)ว">(ง ื▿ ื)ว</div>
+                    </div>
+
+                    <!--安慰-->
+                    <h3 data-zh="安慰" data-en="Comfort" data-ja="慰める">安慰</h3>
+                    <div class="kaomoji-grid">
+                        <div class="kaomoji-item" data-kaomoji="(ノ_<。)ヾ(´ ▽ ` )">(ノ_<。)ヾ(´ ▽ ` )</div>
+                                <div class="kaomoji-item" data-kaomoji="(*´我`)ﾉﾟ(ﾉД｀ﾟ)ﾟ｡">(*´我`)ﾉﾟ(ﾉД｀ﾟ)ﾟ｡</div>
+                                <div class="kaomoji-item" data-kaomoji="ヽ(~_~(·_·)ゝ">ヽ(~_~(·_·)ゝ</div>
+                                <div class="kaomoji-item" data-kaomoji="(ﾉ_；)ヾ(´ ∀ ` )">(ﾉ_；)ヾ(´ ∀ ` )</div>
+                                <div class="kaomoji-item" data-kaomoji="(*´ー)ﾉ(ノд`)">(*´ー)ﾉ(ノд`)</div>
+                                <div class="kaomoji-item" data-kaomoji="(´-ω-`( _ _ )">(´-ω-`( _ _ )</div>
+                                <div class="kaomoji-item" data-kaomoji="(っ´ω`)ﾉ(╥ω╥)">(っ´ω`)ﾉ(╥ω╥)</div>
+                                <div class="kaomoji-item" data-kaomoji="(o・_・)ノ”(ノ_<、)">(o・_・)ノ”(ノ_<、)</div>
+                                <div class="kaomoji-item" data-kaomoji="ρ(- ω -、)ヾ(￣ω￣; )">ρ(- ω -、)ヾ(￣ω￣; )</div>
+                                 <div class="kaomoji-item" data-kaomoji="ヽ(￣ω￣(.. )ゝ">ヽ(￣ω￣(.. )ゝ</div>
+                                </div>
+                        </div>
+
+
+                        <!--消极情绪-->
+                        <div class="category-content" id="negative">
+                            <!--不满-->
+                            <h3 data-zh="不满" data-en="Dissatisfaction" data-ja="淋しさ">不满</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="(＃＞＜)">(＃＞＜)</div>
+                                <div class="kaomoji-item" data-kaomoji="(；⌣̀_⌣́)">(；⌣̀_⌣́)</div>
+                                <div class="kaomoji-item" data-kaomoji="(￣ ￣|||)">(￣ ￣|||)</div>
+                                <div class="kaomoji-item" data-kaomoji="(；￣Д￣)">(；￣Д￣)</div>
+                                <div class="kaomoji-item" data-kaomoji="(＞ｍ＜)">(＞ｍ＜)</div>
+                                <div class="kaomoji-item" data-kaomoji="(︶︹︺)">(︶︹︺)</div>
+                                <div class="kaomoji-item" data-kaomoji="凸(￣ヘ￣)">凸(￣ヘ￣)</div>
+                                <div class="kaomoji-item" data-kaomoji="(⇀‸↼‶)">(⇀‸↼‶)</div>
+                                <div class="kaomoji-item" data-kaomoji="o(>< )o">o(>< )o</div>
+                                <div class="kaomoji-item" data-kaomoji="(ᗒᗣᗕ)՞">(ᗒᗣᗕ)՞</div>
+                            </div>
+
+                            <!--生气-->
+                            <h3 data-zh="生气" data-en="Anger" data-ja="怒り">生气</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="(＃`Д´)">(＃`Д´)</div>
+                                <div class="kaomoji-item" data-kaomoji="(`皿´＃)">(`皿´＃)</div>
+                                <div class="kaomoji-item" data-kaomoji="ヽ(`⌒´メ)ノ">ヽ(`⌒´メ)ノ</div>
+                                <div class="kaomoji-item" data-kaomoji="凸(`△´＃)">凸(`△´＃)</div>
+                                <div class="kaomoji-item" data-kaomoji="ψ( ` ∇ ´ )ψ">ψ( ` ∇ ´ )ψ</div>
+                                <div class="kaomoji-item" data-kaomoji="┌∩┐(◣_◢)┌∩┐">┌∩┐(◣_◢)┌∩┐</div>
+                                <div class="kaomoji-item" data-kaomoji="(°ㅂ°╬)">(°ㅂ°╬)</div>
+                                <div class="kaomoji-item" data-kaomoji="ψ(▼へ▼メ)～→">ψ(▼へ▼メ)～→</div>
+                                <div class="kaomoji-item" data-kaomoji="(‡▼益▼)">(‡▼益▼)</div>
+                                <div class="kaomoji-item" data-kaomoji="٩(╬ʘ益ʘ╬)۶">٩(╬ʘ益ʘ╬)۶</div>
+                            </div>
+
+                            <!--伤心-->
+                            <h3 data-zh="伤心" data-en="Sadness" data-ja="悲しい">伤心</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="(ノ_<。)">(ノ_<。)</div>
+                                <div class="kaomoji-item" data-kaomoji="(-ω-、)">(-ω-、)</div>
+                                <div class="kaomoji-item" data-kaomoji="o(TヘTo)">o(TヘTo)</div>
+                                <div class="kaomoji-item" data-kaomoji="｡･ﾟﾟ*(>д<)*ﾟﾟ･｡">｡･ﾟﾟ*(>д<)*ﾟﾟ･｡</div>
+                                <div class="kaomoji-item" data-kaomoji="( ﾟ，_ゝ｀)">( ﾟ，_ゝ｀)</div>
+                                <div class="kaomoji-item" data-kaomoji="(个_个)">(个_个)</div>
+                                <div class="kaomoji-item" data-kaomoji="( ╥ω╥ )">( ╥ω╥ )</div>
+                                <div class="kaomoji-item" data-kaomoji="(ノ_<、)">(ノ_<、)</div>
+                                <div class="kaomoji-item" data-kaomoji="(っ˘̩╭╮˘̩)っ">(っ˘̩╭╮˘̩)っ</div>
+                                <div class="kaomoji-item" data-kaomoji="(ಥ﹏ಥ)">(ಥ﹏ಥ)</div>
+                            </div>
+
+                            <!--痛苦-->
+                            <h3 data-zh="痛苦" data-en="Pain" data-ja="痛み">痛苦</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="~(>_<~)">~(>_<~)</div>
+                                <div class="kaomoji-item" data-kaomoji="(☆_@)">(☆_@)</div>
+                                <div class="kaomoji-item" data-kaomoji="(×_×)⌒☆">(×_×)⌒☆</div>
+                                <div class="kaomoji-item" data-kaomoji="(×﹏×)">(×﹏×)</div>
+                                <div class="kaomoji-item" data-kaomoji="☆(＃××)">☆(＃××)</div>
+                                <div class="kaomoji-item" data-kaomoji="[ ± _ ± ]">[ ± _ ± ]</div>
+                                <div class="kaomoji-item" data-kaomoji=""٩(× ×)۶>٩(× ×)۶</div>
+                                <div class="kaomoji-item" data-kaomoji="_:(´ཀ`」 ∠):_">_:(´ཀ`」 ∠):_</div>
+                                <div class="kaomoji-item" data-kaomoji="(ﾒ﹏ﾒ)">(ﾒ﹏ﾒ)</div>
+                                <div class="kaomoji-item" data-kaomoji="☆⌒(>。<)">☆⌒(>。<)</div>
+                            </div>
+
+                            <!--害怕-->
+                            <h3 data-zh="害怕" data-en="Fear" data-ja="恐れ">害怕</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="(／。＼)">(／。＼)</div>
+                                <div class="kaomoji-item" data-kaomoji="..・ヾ(。＞＜)シ">..・ヾ(。＞＜)シ</div>
+                                <div class="kaomoji-item" data-kaomoji="(;;;*_*)">(;;;*_*)</div>
+                                <div class="kaomoji-item" data-kaomoji="Σ(°△°|||)︴">Σ(°△°|||)︴</div>
+                                <div class="kaomoji-item" data-kaomoji="{{ (>_<) }}">{{ (>_<) }}</div>
+                                <div class="kaomoji-item" data-kaomoji="＼(º □ º l|l)/">＼(º □ º l|l)/</div>
+                                <div class="kaomoji-item" data-kaomoji="〣( ºΔº )〣">〣( ºΔº )〣</div>
+                                <div class="kaomoji-item" data-kaomoji="▓▒░(°◡°)░▒▓">▓▒░(°◡°)░▒▓</div>
+                                <div class="kaomoji-item" data-kaomoji="(°□°;)">(°□°;)</div>
+                                <div class="kaomoji-item" data-kaomoji="〜(＞＜)〜">〜(＞＜)〜</div>
+                            </div>
+                        </div>
+
+                        <!--中性-->
+                        <div class="category-content" id="neutral">
+                            <!--漠不关心-->
+                            <h3 data-zh="不关心" data-en="Indifference" data-ja="無関心">不关心</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="ヽ(ー_ー )ノ">ヽ(ー_ー )ノ</div>
+                                <div class="kaomoji-item" data-kaomoji="ヽ(　￣д￣)ノ">ヽ(　￣д￣)ノ</div>
+                                <div class="kaomoji-item" data-kaomoji="┐(￣ヘ￣)┌">┐(￣ヘ￣)┌</div>
+                                <div class="kaomoji-item" data-kaomoji="┐(︶▽︶)┌">┐(︶▽︶)┌</div>
+                                <div class="kaomoji-item" data-kaomoji="¯\_(ツ)_/¯">¯\_(ツ)_/¯</div>
+                                <div class="kaomoji-item" data-kaomoji="┐( ´ д ` )┌">┐( ´ д ` )┌</div>
+                                <div class="kaomoji-item" data-kaomoji="┐(￣∀￣)┌">┐(￣∀￣)┌</div>
+                                <div class="kaomoji-item" data-kaomoji="╮( ˘ ､ ˘ )╭">╮( ˘ ､ ˘ )╭</div>
+                                <div class="kaomoji-item" data-kaomoji="┐(￣ヮ￣)┌">┐(￣ヮ￣)┌</div>
+                                <div class="kaomoji-item" data-kaomoji="ᕕ( ᐛ )ᕗ">ᕕ( ᐛ )ᕗ</div>
+                            </div>
+
+                            <!--困惑-->
+                            <h3 data-zh="困惑" data-en="Confusion" data-ja="困惑">困惑</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="σ(￣、￣〃)">σ(￣、￣〃)</div>
+                                <div class="kaomoji-item" data-kaomoji="(-_-;)・・・">(-_-;)・・・</div>
+                                <div class="kaomoji-item" data-kaomoji="(〃￣ω￣〃ゞ">(〃￣ω￣〃ゞ</div>
+                                <div class="kaomoji-item" data-kaomoji="╮(￣ω￣;)╭">╮(￣ω￣;)╭</div>
+                                <div class="kaomoji-item" data-kaomoji="(＠_＠)">(＠_＠)</div>
+                                <div class="kaomoji-item" data-kaomoji="(・・ ) ?">(・・ ) ?</div>
+                                <div class="kaomoji-item" data-kaomoji="(•ิ_•ิ)?">(•ิ_•ิ)?</div>
+                                <div class="kaomoji-item" data-kaomoji="ლ(¯ロ¯"ლ)">ლ(¯ロ¯"ლ)</div>
+                                <div class="kaomoji-item" data-kaomoji="(¯ . ¯٥)">(¯ . ¯٥)</div>
+                                <div class="kaomoji-item" data-kaomoji="(⊙.⊙)?">(⊙.⊙)?</div>
+                            </div>
+
+                            <!--怀疑-->
+                            <h3 data-zh="怀疑" data-en="Doubt" data-ja="容疑者">怀疑</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="(￢_￢)">(￢_￢)</div>
+                                <div class="kaomoji-item" data-kaomoji="(→_→)">(→_→)</div>
+                                <div class="kaomoji-item" data-kaomoji="(￢‿￢ )">(￢‿￢ )</div>
+                                <div class="kaomoji-item" data-kaomoji="(←_←)">(←_←)</div>
+                                <div class="kaomoji-item" data-kaomoji="(↼_↼)">(↼_↼)</div>
+                                <div class="kaomoji-item" data-kaomoji="(⇀_⇀)">(⇀_⇀)</div>
+                                <div class="kaomoji-item" data-kaomoji="(ᓀ ᓀ)">(ᓀ ᓀ)</div>
+                                <div class="kaomoji-item" data-kaomoji="(„¬ᴗ¬„)">(„¬ᴗ¬„)</div>
+                                <div class="kaomoji-item" data-kaomoji="(¬_¬ )">(¬_¬ )</div>
+                                <div class="kaomoji-item" data-kaomoji="(¬ ¬ )">(¬ ¬ )</div>
+                            </div>
+
+                            <!--惊呀-->
+                            <h3 data-zh="惊讶" data-en="Surprise" data-ja="驚き">惊讶</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="w(°ｏ°)w">w(°ｏ°)w</div>
+                                <div class="kaomoji-item" data-kaomoji="Σ(O_O)">Σ(O_O)</div>
+                                <div class="kaomoji-item" data-kaomoji="(o_O)">(o_O)</div>
+                                <div class="kaomoji-item" data-kaomoji="(°ロ°) !">(°ロ°) !</div>
+                                <div class="kaomoji-item" data-kaomoji="(o_O) !">(o_O) !</div>
+                                <div class="kaomoji-item" data-kaomoji="Σ(□_□)">Σ(□_□)</div>
+                                <div class="kaomoji-item" data-kaomoji="∑(O_O;)">∑(O_O;)</div>
+                                <div class="kaomoji-item" data-kaomoji="( : ౦ ‸ ౦ : )">( : ౦ ‸ ౦ : )</div>
+                                <div class="kaomoji-item" data-kaomoji="(⊙_⊙)">(⊙_⊙)</div>
+                                <div class="kaomoji-item" data-kaomoji="ヽ(°〇°)ﾉ">ヽ(°〇°)ﾉ</div>
+                            </div>
+                        </div>
+
+
+                        <!--动作颜文字-->
+                        <div class="category-content" id="actions">
+                            <!--问候-->
+                            <h3 data-zh="问候" data-en="Greeting" data-ja="挨拶">问候</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="(*・ω・)ﾉ">(*・ω・)ﾉ</div>
+                                <div class="kaomoji-item" data-kaomoji="(＠´ー`)ﾉﾞ">(＠´ー`)ﾉﾞ</div>
+                                <div class="kaomoji-item" data-kaomoji="＼(⌒▽⌒)">＼(⌒▽⌒)</div>
+                                <div class="kaomoji-item" data-kaomoji="ヾ(☆▽☆)">ヾ(☆▽☆)</div>
+                                <div class="kaomoji-item" data-kaomoji="~ヾ(・ω・)">~ヾ(・ω・)</div>
+                                <div class="kaomoji-item" data-kaomoji="(・_・)ノ">(・_・)ノ</div>
+                                <div class="kaomoji-item" data-kaomoji="( ´ ω ` )ノﾞ">( ´ ω ` )ノﾞ</div>
+                                <div class="kaomoji-item" data-kaomoji="(⌒ω⌒)ﾉ">(⌒ω⌒)ﾉ</div>
+                                <div class="kaomoji-item" data-kaomoji="(✧∀✧)/">(✧∀✧)/</div>
+                                <div class="kaomoji-item" data-kaomoji="(￣▽￣)/">(￣▽￣)/</div>
+                            </div>
+
+                            <!--拥抱-->
+                            <h3 data-zh="抱抱" data-en="Hugging" data-ja="ハグ">抱抱</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="(づ￣ ³￣)づ">(づ￣ ³￣)づ</div>
+                                <div class="kaomoji-item" data-kaomoji="(つ≧▽≦)つ">(つ≧▽≦)つ</div>
+                                <div class="kaomoji-item" data-kaomoji="(づ ◕‿◕ )づ">(づ ◕‿◕ )づ</div>
+                                <div class="kaomoji-item" data-kaomoji="(⊃｡•́‿•̀｡)⊃">(⊃｡•́‿•̀｡)⊃</div>
+                                <div class="kaomoji-item" data-kaomoji="(つ . •́ _ʖ •̀ .)つ">(つ . •́ _ʖ •̀ .)つ</div>
+                                <div class="kaomoji-item" data-kaomoji="⊂(･ω･*⊂)">⊂(･ω･*⊂)</div>
+                                <div class="kaomoji-item" data-kaomoji="⊂(￣▽￣)⊃">⊂(￣▽￣)⊃</div>
+                                <div class="kaomoji-item" data-kaomoji="(ノ= ⩊ = )ノ">(ノ= ⩊ = )ノ</div>
+                                <div class="kaomoji-item" data-kaomoji="(っ ᵔ◡ᵔ)っ">(っ ᵔ◡ᵔ)っ</div>
+                                <div class="kaomoji-item" data-kaomoji="(っ╹ᆺ╹)っ">(っ╹ᆺ╹)っ</div>
+                            </div>
+
+                            <!--Wink-->
+                            <h3 data-zh="眨眼" data-en="Winking" data-ja="ウインク">眨眼</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="(^_~)">(^_~)</div>
+                                <div class="kaomoji-item" data-kaomoji="(^_-)≡☆">(^_-)≡☆</div>
+                                <div class="kaomoji-item" data-kaomoji="(~人^)">(~人^)</div>
+                                <div class="kaomoji-item" data-kaomoji="(^人<)〜☆">(^人<)〜☆</div>
+                                <div class="kaomoji-item" data-kaomoji="☆⌒(ゝ。∂)">☆⌒(ゝ。∂)</div>
+                                <div class="kaomoji-item" data-kaomoji="(^_−)☆">(^_−)☆</div>
+                                <div class="kaomoji-item" data-kaomoji="(･ω<)☆">(･ω<)☆</div>
+                                <div class="kaomoji-item" data-kaomoji="(^.~)☆">(^.~)☆</div>
+                                <div class="kaomoji-item" data-kaomoji="(｡•̀ᴗ-)✧">(｡•̀ᴗ-)✧</div>
+                                <div class="kaomoji-item" data-kaomoji="(>ᴗ•)">(>ᴗ•)</div>
+
+                            </div>
+
+                            <!--道歉-->
+                            <h3 data-zh="抱歉" data-en="Apologizing" data-ja="ごめんなさい">抱歉</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="m(_ _)m">m(_ _)m</div>
+                                <div class="kaomoji-item" data-kaomoji="(シ_ _)シ">(シ_ _)シ</div>
+                                <div class="kaomoji-item" data-kaomoji="<(_ _)>"><(_ _)></div>
+                                <div class="kaomoji-item" data-kaomoji="人(_ _*)">人(_ _*)</div>
+                                <div class="kaomoji-item" data-kaomoji="m(_ _;m)">m(_ _;m)</div>
+                                <div class="kaomoji-item" data-kaomoji="(シ. .)シ">(シ. .)シ</div>
+                                <div class="kaomoji-item" data-kaomoji="m(. .)m">m(. .)m</div>
+                                <div class="kaomoji-item" data-kaomoji="(*_ _)人">(*_ _)人</div>
+                                <div class="kaomoji-item" data-kaomoji="(m;_ _)m">(m;_ _)m</div>
+                            </div>
+
+                            <!--鼻出血-->
+                            <h3 data-zh="鼻出血" data-en="Nosebleeding" data-ja="鼻血">鼻出血</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="(*￣ii￣)">(*￣ii￣)</div>
+                                <div class="kaomoji-item" data-kaomoji="(￣ﾊ￣*)">(￣ﾊ￣*)</div>
+                                <div class="kaomoji-item" data-kaomoji="\(￣ﾊ￣)">\(￣ﾊ￣)</div>
+                                <div class="kaomoji-item" data-kaomoji="(＾་།＾)">(＾་།＾)</div>
+                                <div class="kaomoji-item" data-kaomoji="(＾〃＾)">(＾〃＾)</div>
+                                <div class="kaomoji-item" data-kaomoji="(￣ ¨ヽ￣)">(￣ ¨ヽ￣)</div>
+                                <div class="kaomoji-item" data-kaomoji="(￣ ;￣)">(￣ ;￣)</div>
+                                <div class="kaomoji-item" data-kaomoji="(￣ ;;￣)">(￣ ;;￣)</div>
+                            </div>
+
+                            <!--隐身-->
+                            <h3 data-zh="隐身" data-en="Hiding" data-ja="隠蔽">隐身</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="|･ω･)">|･ω･)</div>
+                                <div class="kaomoji-item" data-kaomoji="ﾍ(･_|">ﾍ(･_|</div>
+                                <div class="kaomoji-item" data-kaomoji="|_￣))">|_￣))</div>
+                                <div class="kaomoji-item" data-kaomoji="┬┴┬┴┤(･_├┬┴┬┴">┬┴┬┴┤(･_├┬┴┬┴</div>
+                                <div class="kaomoji-item" data-kaomoji="┬┴┬┴┤･ω･)ﾉ">┬┴┬┴┤･ω･)ﾉ</div>
+                                <div class="kaomoji-item" data-kaomoji="┬┴┬┴┤( ͡° ͜ʖ├┬┴┬┴">┬┴┬┴┤( ͡° ͜ʖ├┬┴┬┴</div>
+                                <div class="kaomoji-item" data-kaomoji="┬┴┬┴┤(･_├┬┴┬┴">┬┴┬┴┤(･_├┬┴┬┴</div>
+                                <div class="kaomoji-item" data-kaomoji="|_・)">|_・)</div>
+                                <div class="kaomoji-item" data-kaomoji="|･д･)ﾉ">|･д･)ﾉ</div>
+                                <div class="kaomoji-item" data-kaomoji="|ʘ‿ʘ)╯">|ʘ‿ʘ)╯</div>
+                            </div>
+
+                            <!--跑步-->
+                            <h3 data-zh="跑步" data-en="Running" data-ja="ランニング">跑步</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="☆ﾐ(o*･ω･)ﾉ">☆ﾐ(o*･ω･)ﾉ</div>
+                                <div class="kaomoji-item" data-kaomoji="C= C= C= C= C=┌(;・ω・)┘">C= C= C= C= C=┌(;・ω・)┘</div>
+                                <div class="kaomoji-item" data-kaomoji="─=≡Σ((( つ＞＜)つ">─=≡Σ((( つ＞＜)つ</div>
+                                <div class="kaomoji-item" data-kaomoji="ε=ε=ε=ε=┌(;￣▽￣)┘">ε=ε=ε=ε=┌(;￣▽￣)┘</div>
+                                <div class="kaomoji-item" data-kaomoji="ε=ε=┌( >_<)┘">ε=ε=┌( >_<)┘</div>
+                                <div class="kaomoji-item" data-kaomoji="C= C= C= C=┌( `ー´)┘">C= C= C= C=┌( `ー´)┘</div>
+                                <div class="kaomoji-item" data-kaomoji="ε===(っ≧ω≦)っ">ε===(っ≧ω≦)っ</div>
+                                <div class="kaomoji-item" data-kaomoji="ヽ(￣д￣;)ノ=3=3=3">ヽ(￣д￣;)ノ=3=3=3</div>
+                                <div class="kaomoji-item" data-kaomoji="。。。ミヽ(。＞＜)ノ">。。。ミヽ(。＞＜)ノ</div>
+                            </div>
+
+                            <!--写字-->
+                            <h3 data-zh="写字" data-en="Writing" data-ja="書き込み">写字</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="__φ(．．)">__φ(．．)</div>
+                                <div class="kaomoji-item" data-kaomoji="( ￣ー￣)φ__">( ￣ー￣)φ__</div>
+                                <div class="kaomoji-item" data-kaomoji="__φ(。。)">__φ(。。)</div>
+                                <div class="kaomoji-item" data-kaomoji="__φ(．．;)">__φ(．．;)</div>
+                                <div class="kaomoji-item" data-kaomoji="__〆(￣ー￣ )">__〆(￣ー￣ )</div>
+                                <div class="kaomoji-item" data-kaomoji="....φ(・∀・*)">....φ(・∀・*)</div>
+                                <div class="kaomoji-item" data-kaomoji="( ^▽^)ψ__">( ^▽^)ψ__</div>
+                                <div class="kaomoji-item" data-kaomoji="....φ(︶▽︶)φ....">....φ(︶▽︶)φ....</div>
+                                <div class="kaomoji-item" data-kaomoji="( . .)φ__">( . .)φ__</div>
+                                <div class="kaomoji-item" data-kaomoji="__φ(◎◎ヘ)">__φ(◎◎ヘ)</div>
+                            </div>
+
+                            <!--睡觉-->
+                            <h3 data-zh="睡觉" data-en="sleeping" data-ja="眠っている">睡觉</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="[(－－)]..zzZ">[(－－)]..zzZ</div>
+                                <div class="kaomoji-item" data-kaomoji="(－_－) zzZ">(－_－) zzZ</div>
+                                <div class="kaomoji-item" data-kaomoji="(∪｡∪)｡｡｡zzZ">(∪｡∪)｡｡｡zzZ</div>
+                                <div class="kaomoji-item" data-kaomoji="(－ω－) zzZ">(－ω－) zzZ</div>
+                                <div class="kaomoji-item" data-kaomoji="(￣o￣) zzZZzzZZ">(￣o￣) zzZZzzZZ</div>
+                                <div class="kaomoji-item" data-kaomoji="(( _ _ ))..zzzZZ">(( _ _ ))..zzzZZ</div>
+                                <div class="kaomoji-item" data-kaomoji="(￣ρ￣)..zzZZ">(￣ρ￣)..zzZZ</div>
+                                <div class="kaomoji-item" data-kaomoji="(－.－)...zzz">(－.－)...zzz</div>
+                                <div class="kaomoji-item" data-kaomoji="(＿ ＿*) Z z z">(＿ ＿*) Z z z</div>
+                                <div class="kaomoji-item" data-kaomoji="(x . x) ~~zzZ">(x . x) ~~zzZ</div>
+                            </div>
+                        </div>
+
+                        <!--小动物-->
+                        <div class="category-content" id="animals">
+                            <!--猫猫-->
+                            <h3 data-zh="猫" data-en="Cat" data-ja="猫">猫</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="(=^･ω･^=)">(=^･ω･^=)</div>
+                                <div class="kaomoji-item" data-kaomoji="(=①ω①=)">(=①ω①=)</div>
+                                <div class="kaomoji-item" data-kaomoji="( =ω=)..nyaa">( =ω=)..nyaa</div>
+                                <div class="kaomoji-item" data-kaomoji="(=^‥^=)">(=^‥^=)</div>
+                                <div class="kaomoji-item" data-kaomoji="(=^-ω-^=)">(=^-ω-^=)</div>
+                                <div class="kaomoji-item" data-kaomoji="(＾• ω •＾)">(＾• ω •＾)</div>
+                                <div class="kaomoji-item" data-kaomoji="ฅ(•ㅅ•❀)ฅ">ฅ(•ㅅ•❀)ฅ</div>
+                                <div class="kaomoji-item" data-kaomoji="ଲ(ⓛ ω ⓛ)ଲ">ଲ(ⓛ ω ⓛ)ଲ</div>
+                                <div class="kaomoji-item" data-kaomoji="(^˵◕ω◕˵^)">(^˵◕ω◕˵^)</div>
+                                <div class="kaomoji-item" data-kaomoji="ฅ(^◕ᴥ◕^)ฅ">ฅ(^◕ᴥ◕^)ฅ</div>
+                            </div>
+
+                            <!--熊-->
+                            <h3 data-zh="熊" data-en="Bear" data-ja="クマ">熊</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="( ´(ｴ)ˋ )">( ´(ｴ)ˋ )</div>
+                                <div class="kaomoji-item" data-kaomoji="(*￣(ｴ)￣*)">(*￣(ｴ)￣*)</div>
+                                <div class="kaomoji-item" data-kaomoji="ヽ( ˋ(ｴ)´ )ﾉ">ヽ( ˋ(ｴ)´ )ﾉ</div>
+                                <div class="kaomoji-item" data-kaomoji="(／(ｴ)＼)">(／(ｴ)＼)</div>
+                                <div class="kaomoji-item" data-kaomoji="⊂(´(ェ)ˋ)⊃">⊂(´(ェ)ˋ)⊃</div>
+                                <div class="kaomoji-item" data-kaomoji="ʕ ᵔᴥᵔ ʔ">ʕ ᵔᴥᵔ ʔ</div>
+                                <div class="kaomoji-item" data-kaomoji="ʕ •̀ ω •́ ʔ">ʕ •̀ ω •́ ʔ</div>
+                                <div class="kaomoji-item" data-kaomoji="ʕ •̀ o •́ ʔ">ʕ •̀ o •́ ʔ</div>
+                                <div class="kaomoji-item" data-kaomoji="ʕ •ᴥ• ʔ">ʕ •ᴥ• ʔ</div>
+                                <div class="kaomoji-item" data-kaomoji="ʕಠᴥಠʔ">ʕಠᴥಠʔ</div>
+                            </div>
+
+                            <!--狗-->
+                            <h3 data-zh="狗" data-en="Dog" data-ja="犬">狗</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="∪＾ェ＾∪">∪＾ェ＾∪</div>
+                                <div class="kaomoji-item" data-kaomoji="∪･ω･∪">∪･ω･∪</div>
+                                <div class="kaomoji-item" data-kaomoji="∪￣-￣∪">∪￣-￣∪</div>
+                                <div class="kaomoji-item" data-kaomoji="∪･ｪ･∪">∪･ｪ･∪</div>
+                                <div class="kaomoji-item" data-kaomoji="Ｕ^皿^Ｕ">Ｕ^皿^Ｕ</div>
+                                <div class="kaomoji-item" data-kaomoji="ＵＴｪＴＵ">ＵＴｪＴＵ</div>
+                                <div class="kaomoji-item" data-kaomoji="U^ｪ^U">U^ｪ^U</div>
+                                <div class="kaomoji-item" data-kaomoji="V●ᴥ●V">V●ᴥ●V</div>
+                                <div class="kaomoji-item" data-kaomoji="U・ᴥ・U	">U・ᴥ・U</div>
+                            </div>
+
+                            <!--兔子-->
+                            <h3 data-zh="兔子" data-en="Rabbit" data-ja="うさぎ">兔子</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="／(≧ x ≦)＼">／(≧ x ≦)＼</div>
+                                <div class="kaomoji-item" data-kaomoji="／(･ × ･)＼">／(･ × ･)＼</div>
+                                <div class="kaomoji-item" data-kaomoji="／(=´x`=)＼">／(=´x`=)＼</div>
+                                <div class="kaomoji-item" data-kaomoji="／(^ x ^)＼">／(^ x ^)＼</div>
+                                <div class="kaomoji-item" data-kaomoji="／(=･ x ･=)＼">／(=･ x ･=)＼</div>
+                                <div class="kaomoji-item" data-kaomoji="／(^ × ^)＼">／(^ × ^)＼</div>
+                                <div class="kaomoji-item" data-kaomoji="／(＞×＜)＼">／(＞×＜)＼</div>
+                                <div class="kaomoji-item" data-kaomoji="／(˃ᆺ˂)＼">／(˃ᆺ˂)＼</div>
+                                <div class="kaomoji-item" data-kaomoji="૮ ˶ᵔ ᵕ ᵔ˶ ა">૮ ˶ᵔ ᵕ ᵔ˶ ა</div>
+                                <div class="kaomoji-item" data-kaomoji="૮₍ ˶• ༝ •˶ ₎ა">૮₍ ˶• ༝ •˶ ₎ა</div>
+                            </div>
+
+                            <!--猪-->
+                            <h3 data-zh="猪" data-en="Pig" data-ja="豚">猪</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="( ´(00)ˋ )">( ´(00)ˋ )</div>
+                                <div class="kaomoji-item" data-kaomoji="(￣(ω)￣)">(￣(ω)￣)</div>
+                                <div class="kaomoji-item" data-kaomoji="ヽ( ˋ(00)´ )ノ">ヽ( ˋ(00)´ )ノ</div>
+                                <div class="kaomoji-item" data-kaomoji="( ´(oo)ˋ )">( ´(oo)ˋ )</div>
+                                <div class="kaomoji-item" data-kaomoji="＼(￣(oo)￣)／">＼(￣(oo)￣)／</div>
+                                <div class="kaomoji-item" data-kaomoji="｡ﾟ(ﾟ´(00)`ﾟ)ﾟ｡">｡ﾟ(ﾟ´(00)`ﾟ)ﾟ｡</div>
+                                <div class="kaomoji-item" data-kaomoji="(￣(00)￣)">(￣(00)￣)</div>
+                                <div class="kaomoji-item" data-kaomoji="(ˆ(oo)ˆ)">(ˆ(oo)ˆ)</div>
+                            </div>
+
+                            <!--鸟-->
+                            <h3 data-zh="鸟" data-en="Bird" data-ja="鳥">鸟</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="(￣Θ￣)">(￣Θ￣)</div>
+                                <div class="kaomoji-item" data-kaomoji="(`･Θ･´)">(`･Θ･´)</div>
+                                <div class="kaomoji-item" data-kaomoji="( ˋ Θ ´ )">( ˋ Θ ´ )</div>
+                                <div class="kaomoji-item" data-kaomoji="(◉Θ◉)">(◉Θ◉)</div>
+                                <div class="kaomoji-item" data-kaomoji="＼( ˋ Θ ´ )／">＼( ˋ Θ ´ )／</div>
+                                <div class="kaomoji-item" data-kaomoji="(･θ･)">(･θ･)</div>
+                                <div class="kaomoji-item" data-kaomoji="(・Θ・)">(・Θ・)</div>
+                                <div class="kaomoji-item" data-kaomoji="ヾ(￣◇￣)ノ〃">ヾ(￣◇￣)ノ〃</div>
+                                <div class="kaomoji-item" data-kaomoji="(･Θ･)">(･Θ･)</div>
+                            </div>
+
+                            <!--鱼-->
+                            <h3 data-zh="其他动物" data-en="Other" data-ja="他の">其他动物</h3>
+                            <div class="kaomoji-grid">
+                                <div class="kaomoji-item" data-kaomoji="(°)#))<<">(°)#))<<</div>
+                                <div class="kaomoji-item" data-kaomoji="<・ )))><<"><・ )))><<</div>
+                                <div class="kaomoji-item" data-kaomoji="ζ°)))彡">ζ°)))彡</div>
+                                <div class="kaomoji-item" data-kaomoji="≧( ° ° )≦">≧( ° ° )≦</div>
+                                <div class="kaomoji-item" data-kaomoji="/╲/\╭(ఠఠ益ఠఠ)╮/\╱\">/╲/\╭(ఠఠ益ఠఠ)╮/\╱\</div>
+                                <div class="kaomoji-item" data-kaomoji="/╲/\╭༼ ººل͟ºº ༽╮/\╱\">/╲/\╭༼ ººل͟ºº ༽╮/\╱\</div>
+                                <div class="kaomoji-item" data-kaomoji="/╲/\╭( ͡°͡° ͜ʖ ͡°͡°)╮/\╱\">/╲/\╭( ͡°͡° ͜ʖ ͡°͡°)╮/\╱\</div>
+                                <div class="kaomoji-item" data-kaomoji="/╲/\( •̀ ω •́ )/\╱\">/╲/\( •̀ ω •́ )/\╱\</div>
+                            </div>
+                        </div>
+
+
+            </section>
+
+            <!-- 复制功能提示 -->
+            <section class="copy-section">
+                <p data-zh="点击任意颜文字即可复制到剪贴板！" data-en="Click on any kaomoji to copy it to clipboard!"
+                    data-ja="任意の顔文字をクリックしてクリップボードにコピー！">点击任意颜文字即可复制到剪贴板！</p>
+                <div class="copy-notification" id="copy-notification">已复制!</div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p data-zh="为颜文字爱好者精心制作 ♡" data-en="Made with ♡ for kaomoji lovers" data-ja="顔文字愛好家のために心を込めて作りました ♡">
+                为颜文字爱好者精心制作 ♡</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
