@@ -8,7 +8,7 @@
 body {
     font-family: 'Arial Rounded MT Bold', 'Hiragino Sans GB', 'Microsoft YaHei', 'Hiragino Kaku Gothic Pro', sans-serif;
     /*background-color: #fff5f5;*/
-    background-image:bg.png;  
+    background-image:url(bg.png);  
     color: #555;
     line-height: 1.6;
     transition: all 0.3s ease;
