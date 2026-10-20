@@ -1,251 +1,311 @@
 // script.js
-// 语言切换功能
-document.addEventListener('DOMContentLoaded', function() {
-    const langButtons = document.querySelectorAll('.lang-btn');
-    let currentLang = 'zh'; // 默认中文
-    
-    // 语言数据
-    const copyTexts = {
-        'zh': '点击复制',
-        'en': 'Click to copy',
-        'ja': 'クリックでコピー'
+// 从 kaomoji.js 读取数据并渲染：分类切换、搜索、三语切换、点击复制
+(function () {
+    'use strict';
+
+    var DATA = window.KAOMOJI_DATA;
+    if (!DATA) return;
+
+    var CATS = DATA.categories;
+    var ITEMS = DATA.items;
+    var LANGS = ['zh', 'en', 'ja'];
+
+    // ---------- 文案 ----------
+    var TEXT = {
+        copy: { zh: '点击复制', en: 'Click to copy', ja: 'クリックでコピー' },
+        copied: { zh: '已复制!', en: 'Copied!', ja: 'コピーしました!' },
+        fail: { zh: '复制失败', en: 'Copy failed', ja: 'コピー失敗' },
+        all: { zh: '共 {n} 条', en: '{n} kaomoji', ja: '全 {n} 件' },
+        found: { zh: '找到 {n} 条', en: '{n} found', ja: '{n} 件見つかりました' },
+        none: { zh: '没有匹配的颜文字，换个关键词试试', en: 'No match. Try another keyword.', ja: '一致する顔文字がありません' }
     };
-    
-    const notificationTexts = {
-        'zh': '已复制!',
-        'en': 'Copied!',
-        'ja': 'コピーしました!'
-    };
-    
-    // 语言切换函数
-    function switchLanguage(lang) {
-        currentLang = lang;
-        
-        // 更新语言按钮状态
-        langButtons.forEach(button => {
-            if (button.getAttribute('data-lang') === lang) {
-                button.classList.add('active');
-            } else {
-                button.classList.remove('active');
-            }
-        });
-        
-        // 更新所有带有data-zh、data-en和data-ja属性的元素
-        document.querySelectorAll('[data-zh]').forEach(element => {
-            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                element.placeholder = element.getAttribute(`data-${lang}`);
-            } else {
-                // 对于包含颜文字的元素，只更新data-copy-text属性，不更新文本内容
-                if (!element.classList.contains('kaomoji-item') && !element.classList.contains('cute-kaomoji')) {
-                    element.textContent = element.getAttribute(`data-${lang}`);
-                }
-            }
-        });
-        
-        // 更新复制提示文本
-        document.querySelectorAll('.kaomoji-item').forEach(item => {
-            item.setAttribute('data-copy-text', copyTexts[lang]);
-        });
-        
-        // 更新通知文本
-        document.getElementById('copy-notification').textContent = notificationTexts[lang];
+
+    function t(key, n) {
+        var s = TEXT[key][state.lang];
+        return n === undefined ? s : s.replace('{n}', n);
     }
-    
-    // 绑定语言切换事件
-    langButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const lang = this.getAttribute('data-lang');
-            switchLanguage(lang);
-            // 保存语言偏好到本地存储
-            localStorage.setItem('preferred-language', lang);
-        });
+
+    // ---------- 状态 ----------
+    var state = {
+        lang: 'zh',
+        cat: CATS.length ? CATS[0].id : '',
+        query: ''
+    };
+
+    var catById = {};
+    var subByKey = {};
+    CATS.forEach(function (c) {
+        catById[c.id] = c;
+        (c.subs || []).forEach(function (s) { subByKey[c.id + '|' + s.id] = s; });
     });
-    
-    // 分类标签切换功能
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const categoryContents = document.querySelectorAll('.category-content');
-    
-    tabButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // 移除所有活动状态
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            categoryContents.forEach(content => content.classList.remove('active'));
-            
-            // 添加当前活动状态
-            this.classList.add('active');
-            const category = this.getAttribute('data-category');
-            document.getElementById(category).classList.add('active');
-        });
+
+    // 预建搜索索引：颜文字文本 + 大类名 + 小节名（三语）
+    var INDEX = ITEMS.map(function (it) {
+        var c = catById[it.c];
+        var s = subByKey[it.c + '|' + it.s];
+        var parts = [it.t];
+        if (c) parts.push(c.zh, c.en, c.ja);
+        if (s) parts.push(s.zh, s.en, s.ja);
+        return { it: it, hay: parts.join(' ').toLowerCase() };
     });
-    
-    // 颜文字复制功能
-    const kaomojiItems = document.querySelectorAll('.kaomoji-item');
-    const copyNotification = document.getElementById('copy-notification');
-    
-    // 复制文本到剪贴板的函数
-    function copyToClipboard(text) {
-        // 使用现代剪贴板API
-        if (navigator.clipboard && window.isSecureContext) {
-            return navigator.clipboard.writeText(text);
+
+    var countByCat = {};
+    ITEMS.forEach(function (it) { countByCat[it.c] = (countByCat[it.c] || 0) + 1; });
+
+    // ---------- DOM ----------
+    var el = {
+        tabs: document.getElementById('category-tabs'),
+        list: document.getElementById('kaomoji-list'),
+        stats: document.getElementById('search-stats'),
+        search: document.getElementById('search-input'),
+        empty: document.getElementById('empty-hint'),
+        notify: document.getElementById('copy-notification'),
+        footerCount: document.getElementById('footer-count'),
+        langBtns: Array.prototype.slice.call(document.querySelectorAll('.lang-btn'))
+    };
+
+    // ---------- 渲染 ----------
+    function renderTabs() {
+        el.tabs.textContent = '';
+        CATS.forEach(function (c) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'tab-btn' + (c.id === state.cat && !state.query ? ' active' : '');
+            btn.dataset.category = c.id;
+            btn.appendChild(document.createTextNode(c[state.lang]));
+            var num = document.createElement('span');
+            num.className = 'tab-count';
+            num.textContent = countByCat[c.id] || 0;
+            btn.appendChild(num);
+            el.tabs.appendChild(btn);
+        });
+    }
+
+    function lenBucket(text) {
+        var n = text.replace(/\s/g, '').length;
+        if (n <= 10) return 's';
+        if (n <= 18) return 'm';
+        if (n <= 30) return 'l';
+        return 'xl';
+    }
+
+    function makeItem(it) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'kaomoji-item';
+        btn.dataset.len = lenBucket(it.t);
+        if (it.t.indexOf('\n') > -1) btn.classList.add('is-multiline');
+        btn.dataset.kaomoji = it.t;
+        btn.textContent = it.t;
+        btn.setAttribute('aria-label', it.t.replace(/\n/g, ' '));
+        return btn;
+    }
+
+    function makeGrid(items) {
+        var grid = document.createElement('div');
+        grid.className = 'kaomoji-grid';
+        var frag = document.createDocumentFragment();
+        items.forEach(function (it) { frag.appendChild(makeItem(it)); });
+        grid.appendChild(frag);
+        return grid;
+    }
+
+    function renderList() {
+        el.list.textContent = '';
+        var shown = 0;
+
+        if (state.query) {
+            // 全局搜索：扁平结果，按大类/小节原顺序排列
+            var q = state.query.toLowerCase();
+            var hits = [];
+            for (var i = 0; i < INDEX.length; i++) {
+                if (INDEX[i].hay.indexOf(q) > -1) hits.push(INDEX[i].it);
+            }
+            if (hits.length) {
+                el.list.appendChild(makeGrid(hits));
+            }
+            shown = hits.length;
         } else {
-            // 备用方法：使用传统document.execCommand
-            return new Promise((resolve, reject) => {
-                const textArea = document.createElement('textarea');
-                textArea.value = text;
-                textArea.style.position = 'fixed';
-                textArea.style.left = '-999999px';
-                textArea.style.top = '-999999px';
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-                
-                try {
-                    const successful = document.execCommand('copy');
-                    document.body.removeChild(textArea);
-                    if (successful) {
-                        resolve();
-                    } else {
-                        reject(new Error('复制失败'));
-                    }
-                } catch (err) {
-                    document.body.removeChild(textArea);
-                    reject(err);
-                }
+            // 按当前大类渲染，按小节分组
+            var cat = catById[state.cat];
+            (cat.subs || []).forEach(function (sub) {
+                var group = ITEMS.filter(function (it) {
+                    return it.c === state.cat && it.s === sub.id;
+                });
+                if (!group.length) return;
+                var h3 = document.createElement('h3');
+                h3.textContent = sub[state.lang];
+                h3.appendChild(makeCountBadge(group.length));
+                el.list.appendChild(h3);
+                el.list.appendChild(makeGrid(group));
+                shown += group.length;
             });
         }
+
+        el.empty.hidden = shown > 0;
+        el.empty.textContent = t('none');
+        el.stats.textContent = state.query ? t('found', shown) : t('all', ITEMS.length);
     }
-    
-    // 为每个颜文字项添加点击事件
-    kaomojiItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const textToCopy = this.getAttribute('data-kaomoji');
-            
-            copyToClipboard(textToCopy)
-                .then(() => {
-                    // 显示复制成功提示
-                    copyNotification.classList.add('show');
-                    
-                    // 2秒后隐藏提示
-                    setTimeout(() => {
-                        copyNotification.classList.remove('show');
-                    }, 2000);
-                })
-                .catch(err => {
-                    console.error('复制失败: ', err);
-                    // 可以添加更友好的错误提示
-                    copyNotification.textContent = notificationTexts[currentLang] + ' (失败)';
-                    copyNotification.classList.add('show');
-                    
-                    setTimeout(() => {
-                        copyNotification.classList.remove('show');
-                        copyNotification.textContent = notificationTexts[currentLang];
-                    }, 2000);
-                });
-        });
-    });
-    
-    // 添加一些可爱的交互效果
-    const cuteKaomoji = document.querySelector('.cute-kaomoji');
-    if (cuteKaomoji) {
-        cuteKaomoji.addEventListener('mouseover', function() {
-            this.style.transform = 'scale(1.2) rotate(5deg)';
-            this.style.transition = 'all 0.3s ease';
-        });
-        
-        cuteKaomoji.addEventListener('mouseout', function() {
-            this.style.transform = 'scale(1) rotate(0deg)';
-        });
+
+    function makeCountBadge(n) {
+        var span = document.createElement('span');
+        span.className = 'sub-count';
+        span.textContent = n;
+        return span;
     }
-    
-    // 为颜文字项添加鼠标悬停效果
-    kaomojiItems.forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px) scale(1.05)';
-        });
-        
-        item.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
-    });
-    
-    // 页面加载时的动画效果
-    window.addEventListener('load', function() {
-        document.body.style.opacity = '0';
-        document.body.style.transition = 'opacity 0.5s ease-in';
-        
-        setTimeout(() => {
-            document.body.style.opacity = '1';
-        }, 100);
-        
-        // 添加分类内容的淡入效果
-        const activeContent = document.querySelector('.category-content.active');
-        if (activeContent) {
-            activeContent.style.opacity = '0';
-            activeContent.style.transform = 'translateY(20px)';
-            activeContent.style.transition = 'all 0.5s ease';
-            
-            setTimeout(() => {
-                activeContent.style.opacity = '1';
-                activeContent.style.transform = 'translateY(0)';
-            }, 300);
-        }
-    });
-    
-    // 分类切换时的动画效果
-    tabButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const category = this.getAttribute('data-category');
-            const content = document.getElementById(category);
-            
-            if (content) {
-                content.style.opacity = '0';
-                content.style.transform = 'translateY(20px)';
-                
-                setTimeout(() => {
-                    content.style.opacity = '1';
-                    content.style.transform = 'translateY(0)';
-                }, 300);
-            }
-        });
-    });
-    
-    // 键盘快捷键支持
-    document.addEventListener('keydown', function(event) {
-        // 按ESC键关闭复制提示
-        if (event.key === 'Escape') {
-            copyNotification.classList.remove('show');
-        }
-        
-        // 数字键1-5快速切换分类 (可选功能)
-        if (event.key >= '1' && event.key <= '5') {
-            const index = parseInt(event.key) - 1;
-            const tabs = Array.from(tabButtons);
-            if (tabs[index]) {
-                tabs[index].click();
-            }
-        }
-    });
-    
-    // 初始化语言设置（从本地存储读取或使用默认值）
-    function initializeLanguage() {
-        const savedLang = localStorage.getItem('preferred-language');
-        if (savedLang && ['zh', 'en', 'ja'].includes(savedLang)) {
-            switchLanguage(savedLang);
-        } else {
-            // 根据浏览器语言自动设置
-            const browserLang = navigator.language.toLowerCase();
-            if (browserLang.startsWith('zh')) {
-                switchLanguage('zh');
-            } else if (browserLang.startsWith('ja')) {
-                switchLanguage('ja');
+
+    // ---------- 静态文案（含 placeholder） ----------
+    function applyStatic() {
+        document.querySelectorAll('[data-zh]').forEach(function (node) {
+            var v = node.getAttribute('data-' + state.lang) || node.getAttribute('data-zh');
+            if (node.tagName === 'INPUT' || node.tagName === 'TEXTAREA') {
+                node.placeholder = v;
             } else {
-                switchLanguage('en');
+                node.textContent = v;
+            }
+        });
+        el.langBtns.forEach(function (b) {
+            b.classList.toggle('active', b.dataset.lang === state.lang);
+        });
+        if (el.footerCount) el.footerCount.textContent = ITEMS.length + ' kaomoji';
+        el.notify.textContent = t('copied');
+    }
+
+    function renderAll() {
+        applyStatic();
+        renderTabs();
+        renderList();
+    }
+
+    // ---------- 复制 ----------
+    function copyText(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+            return navigator.clipboard.writeText(text);
+        }
+        return new Promise(function (resolve, reject) {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.focus();
+            ta.select();
+            try {
+                document.execCommand('copy') ? resolve() : reject(new Error('copy failed'));
+            } catch (err) {
+                reject(err);
+            } finally {
+                document.body.removeChild(ta);
+            }
+        });
+    }
+
+    var notifyTimer = null;
+    function notify(msg) {
+        el.notify.textContent = msg;
+        el.notify.classList.add('show');
+        clearTimeout(notifyTimer);
+        notifyTimer = setTimeout(function () {
+            el.notify.classList.remove('show');
+            el.notify.textContent = t('copied');
+        }, 1600);
+    }
+
+    // ---------- 事件 ----------
+    el.list.addEventListener('click', function (e) {
+        var btn = e.target.closest('.kaomoji-item');
+        if (!btn) return;
+        copyText(btn.dataset.kaomoji).then(function () {
+            notify(t('copied'));
+            btn.classList.add('is-copied');
+            setTimeout(function () { btn.classList.remove('is-copied'); }, 600);
+        }).catch(function () {
+            notify(t('fail'));
+        });
+    });
+
+    el.tabs.addEventListener('click', function (e) {
+        var btn = e.target.closest('.tab-btn');
+        if (!btn) return;
+        state.cat = btn.dataset.category;
+        state.query = '';
+        el.search.value = '';
+        localStorage.setItem('kaomoji-cat', state.cat);
+        renderTabs();
+        renderList();
+    });
+
+    var searchTimer = null;
+    el.search.addEventListener('input', function () {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(function () {
+            state.query = el.search.value.trim();
+            renderTabs();
+            renderList();
+        }, 80);
+    });
+
+    el.langBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            state.lang = btn.dataset.lang;
+            localStorage.setItem('preferred-language', state.lang);
+            renderAll();
+        });
+    });
+
+    document.addEventListener('keydown', function (e) {
+        var typing = /^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName);
+
+        if (e.key === 'Escape') {
+            if (state.query) {
+                el.search.value = '';
+                state.query = '';
+                renderTabs();
+                renderList();
+            } else {
+                el.notify.classList.remove('show');
+            }
+            if (typing) el.search.blur();
+            return;
+        }
+
+        if (e.key === '/' && !typing) {
+            e.preventDefault();
+            el.search.focus();
+            return;
+        }
+
+        if (!typing && e.key >= '1' && e.key <= '9') {
+            var idx = parseInt(e.key, 10) - 1;
+            if (CATS[idx]) {
+                state.cat = CATS[idx].id;
+                state.query = '';
+                el.search.value = '';
+                localStorage.setItem('kaomoji-cat', state.cat);
+                renderTabs();
+                renderList();
             }
         }
-    }
-    
-    // 初始化
-    initializeLanguage();
-    
-    console.log('可爱颜文字网站已加载完成！(◕‿◕✿)');
-});
+    });
+
+    // ---------- 初始化 ----------
+    (function init() {
+        var saved = localStorage.getItem('preferred-language');
+        if (saved && LANGS.indexOf(saved) > -1) {
+            state.lang = saved;
+        } else {
+            var nav = (navigator.language || 'zh').toLowerCase();
+            state.lang = nav.indexOf('zh') === 0 ? 'zh' : (nav.indexOf('ja') === 0 ? 'ja' : 'en');
+        }
+
+        var savedCat = localStorage.getItem('kaomoji-cat');
+        if (savedCat && catById[savedCat]) state.cat = savedCat;
+
+        // 支持深度链接：#ascii 直接打开对应分类
+        var hash = (location.hash || '').replace('#', '');
+        if (hash && catById[hash]) state.cat = hash;
+
+        renderAll();
+        console.log('颜文字收藏馆已加载：' + ITEMS.length + ' 条 (◕‿◕✿)');
+    })();
+})();

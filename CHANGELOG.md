@@ -10,7 +10,30 @@
 ### 计划中
 
 - 增加「收藏」功能，把常用颜文字固定在顶部
-- 补充键盘可访问性（复制项支持 Tab 聚焦与回车触发）
+- 搜索支持拼音与模糊匹配
+
+## [1.1.0] - 2026-10-20
+
+### 新增
+
+- 内容从 281 条扩容到 **1926 条**：导入 [kaomojikan/kaomoji-data](https://github.com/kaomojikan/kaomoji-data)（MIT License）并去重、清洗，与原有条目合并
+- 分类从 5 大类扩展到 **8 大类 44 小节**，新增：装饰边框（闪亮 / 文字框 / 量产型 / emoji 混排）、字符画（多行 ASCII art）、次文化
+- **全局搜索**：吸顶搜索框即时过滤，支持按颜文字内容与分类名匹配（三语），显示结果数
+- **深度链接**：`#ascii` 等 hash 可直接打开对应分类
+- 键盘操作：复制项改用原生 `<button>`，支持 Tab 聚焦回车复制；`/` 聚焦搜索框；`Esc` 清空搜索
+- 复制成功后卡片短暂高亮反馈
+
+### 变更
+
+- **数据与视图分离**：内容从 `index.html` 迁出到 `kaomoji.js`（`window.KAOMOJI_DATA`），页面由 JS 渲染；仍保持零依赖、零构建，双击 `index.html` 即可用
+- **列表改紧凑密度**：卡片 150×56（原 200×80）、间距 8px，容器 1200→1320，介绍区默认折叠为一行；首屏可见条数约 15 → 约 70
+- 长颜文字按字符数分三档自动缩字号；多行字符画用等宽字体并跨两列展示
+- 悬停动效收敛（位移 5px → 2px），分类 tabs 吸顶并显示各类数量
+- 记住用户上次浏览的分类（`localStorage`）
+
+### 修复
+
+- 清理原 281 条中 3 条重复项；清除条目内不可见字符与首尾空白（此前部分条目复制内容与显示不一致，如带尾随制表符）
 
 ## [1.0.0] - 2026-10-20
 
@@ -36,5 +59,6 @@
 - `index.html` 补充 `description` / `keywords` / Open Graph 等页面元信息
 - 页脚展示当前版本号与许可证入口
 
-[未发布]: https://github.com/Rosalia3001/Kaomoji/compare/v1.0.0...HEAD
+[未发布]: https://github.com/Rosalia3001/Kaomoji/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/Rosalia3001/Kaomoji/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/Rosalia3001/Kaomoji/releases/tag/v1.0.0
