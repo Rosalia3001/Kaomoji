@@ -12,6 +12,12 @@
 - 增加「收藏」功能，把常用颜文字固定在顶部
 - 搜索支持拼音与模糊匹配
 
+## [1.1.3] - 2026-10-20
+
+### 变更
+
+- 恢复粉色碎花背景图（`bg.png`）：碎花铺底 + 白色内容卡片浮在上面（即 v1.1.1 的观感）；`#fff5f5` 仅作图片加载前的兜底底色
+
 ## [1.1.2] - 2026-10-20
 
 ### 变更
@@ -72,7 +78,8 @@
 - `index.html` 补充 `description` / `keywords` / Open Graph 等页面元信息
 - 页脚展示当前版本号与许可证入口
 
-[未发布]: https://github.com/Rosalia3001/Kaomoji/compare/v1.1.2...HEAD
+[未发布]: https://github.com/Rosalia3001/Kaomoji/compare/v1.1.3...HEAD
+[1.1.3]: https://github.com/Rosalia3001/Kaomoji/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/Rosalia3001/Kaomoji/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/Rosalia3001/Kaomoji/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/Rosalia3001/Kaomoji/compare/v1.0.0...v1.1.0
