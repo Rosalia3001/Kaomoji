@@ -12,6 +12,13 @@
 - 增加「收藏」功能，把常用颜文字固定在顶部
 - 搜索支持拼音与模糊匹配
 
+## [1.1.1] - 2026-10-20
+
+### 变更
+
+- 介绍区改为**常驻平铺展开**（移除折叠交互），恢复「关于颜文字」标题
+- 宽屏下介绍文字自动排成双列（`columns: 2`），展开后仅占约 5 行，首屏仍能看到完整颜文字网格；窄屏（≤768px）回退单列
+
 ## [1.1.0] - 2026-10-20
 
 ### 新增
@@ -59,6 +66,7 @@
 - `index.html` 补充 `description` / `keywords` / Open Graph 等页面元信息
 - 页脚展示当前版本号与许可证入口
 
-[未发布]: https://github.com/Rosalia3001/Kaomoji/compare/v1.1.0...HEAD
+[未发布]: https://github.com/Rosalia3001/Kaomoji/compare/v1.1.1...HEAD
+[1.1.1]: https://github.com/Rosalia3001/Kaomoji/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/Rosalia3001/Kaomoji/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/Rosalia3001/Kaomoji/releases/tag/v1.0.0
